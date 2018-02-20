@@ -1,20 +1,17 @@
-<h1>locations</h1>
 <div class="container">
+<div class="text-center">
+ <h1>LOCATIONS <span class="badge"><%=@locations.count%></span></h1>
+ </div>
   <div class="col-sm-10 col-sm-offset-1 col-xs-12 blog-content">
     <% @locations.each do |location| %>
     <div class="col-xs-12">
       <div class="text-center">
         <h2><%= link_to location.name, location %></h2>
         <h6><%= location.created_at.strftime('%b %d, %Y') %></h6>
-        <h7><%= link_to "show",  location %></h7>
-        <h7><%= link_to "edit",  location %></h7>
-        <h7><%= link_to "delete"%></h7>
-
         <tbody>
-                <% @location.recordings.each do |rec| %>
+                <% location.recordings.each do |rec| %>
                  <tr>
-                     <td><%= rec.temp %></td>
-                     <td><%= rec.status %></td>
+                 <button type="button" class="btn btn-primary"><%= rec.status %><span class="badge"><%=rec.temp%></span></button>
                      <td><%= link_to "Borrar", location_recording_path(rec.location, rec), method: :delete, data: {confirm: "You SUre?"}  %></td>
                 </tr>
                 <% end %>
@@ -25,4 +22,3 @@
     <% end %>
   </div>
 </div>
-<h2><%= link_to "NEW",  new_location_path %></h2>

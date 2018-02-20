@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
     before_action :find_location, only: [:edit, :update, :show, :delete]
-
+    before_action :authenticate_user!, except: [:index, :show]
     def index
         @locations = Location.all
       end
@@ -11,7 +11,7 @@ class LocationsController < ApplicationController
     
       def create
         @location = Location.new(location_params)
-        @Location.save
+        @location.save
 
         redirect_to @location
       end
@@ -33,12 +33,8 @@ class LocationsController < ApplicationController
       end
     
       def destroy
-        if @location.destroy
-          flash[:notice] = "Successfully deleted location!"
-          redirect_to location_path
-        else
-          flash[:alert] = "Error updating location!"
-        end
+        @location.destroy
+        redirect_to locations_path
       end
     
       private

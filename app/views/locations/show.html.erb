@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-7 col-md-offset-2">
+  <div class="col-md-5 col-md-offset-2">
     <h3><%= @location.name %></h3>
 
     <p>
@@ -7,10 +7,10 @@
         
         <% if user_signed_in? %>
         
-          | <%= link_to "Edit", edit_location_path(@location) %> 
-          | <%= link_to "Delete", location_path(@location), method: :delete, 
-                data: {confirm: 'Are you sure?'} %>
-          |  <%= link_to "Add Recording", new_location_recording_path(@location) %>
+          | <button type="button" class="btn btn-success"><%= link_to "Edit", edit_location_path(@location) %> </button>
+          | <button type="button" class="btn btn-danger"><%= link_to "Delete", location_path(@location), method: :delete, 
+                data: {confirm: 'Are you sure?'} %></button>
+          |  <button type="button" class="btn btn-basic"><%= link_to "Add Recording", new_location_recording_path(@location) %></button>
         <% end %>
 
         <% if @location.recordings.any? %>
@@ -21,7 +21,6 @@
                         <th>Temp</th>
                         <th>Estatus</th>
                 <th>
-
                 </th>
                     </thead>
                     <tbody>
@@ -32,6 +31,7 @@
         <% else %>
             <p><em>No Recordings.</em></p>
         <% end %>
+
     </p>
   </div>
 </div>
