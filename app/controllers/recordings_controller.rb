@@ -2,7 +2,7 @@ class RecordingsController < ApplicationController
     before_action :authenticate_user!
 
     def create
-        @location = location.find(params[:location])
+        @location = Location.find(params[:location])
         @recording = @location.recordings.build(recording_param)
         if @recording.save 
           redirect_to @location

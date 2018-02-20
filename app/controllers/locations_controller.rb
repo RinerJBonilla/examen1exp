@@ -44,7 +44,7 @@ class LocationsController < ApplicationController
       private
     
       def location_params
-        @location = Location.find(params[:id])
+        params.require(:location).permit(:name)
       end
     
       def find_location

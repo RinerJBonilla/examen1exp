@@ -11,7 +11,7 @@
         <h7><%= link_to "delete"%></h7>
 
         <tbody>
-                <% location.recordings.each do |rec| %>
+                <% @location.recordings.each do |rec| %>
                  <tr>
                      <td><%= rec.temp %></td>
                      <td><%= rec.status %></td>
