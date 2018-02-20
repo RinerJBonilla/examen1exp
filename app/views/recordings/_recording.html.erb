@@ -1,6 +1,5 @@
-<strong><%= recording.status %></strong>
-
-<div class="well">
-  <%= recording.temp%>
-  <span class="pull-right"><%= time_ago_in_words(recording.created_at) %> Ago</span>
-</div>
+<tr>
+    <td><%= recording.temp %></td>
+    <td><%= recording.status %></td>
+  <td><%= link_to "DELETE", location_recording_path(recording.location, recording), method: :delete, data: {confirm: "Are You Sure?"}  %></td>
+</tr>

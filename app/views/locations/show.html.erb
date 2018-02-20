@@ -3,23 +3,35 @@
     <h3><%= @location.name %></h3>
 
     <p>
-        Submitted <%= time_ago_in_words(@location.created_at) %> Ago
+        Created <%= time_ago_in_words(@location.created_at) %> Ago
         
-        <% if (user_signed_in? && current_user.id == @post.user_id) %>
+        <% if user_signed_in? %>
         
           | <%= link_to "Edit", edit_location_path(@location) %> 
           | <%= link_to "Delete", location_path(@location), method: :delete, 
                 data: {confirm: 'Are you sure?'} %>
+          |  <%= link_to "Add Recording", new_location_recording_path(@location) %>
+        <% end %>
+
+        <% if @location.recordings.any? %>
+            <div>
+                <h2>Recording: </h2>
+                <table border="2">
+                    <thead>
+                        <th>Temp</th>
+                        <th>Estatus</th>
+                <th>
+
+                </th>
+                    </thead>
+                    <tbody>
+                        <%= render @location.recordings%>
+                    </tbody>
+                </table>
+            </div>
+        <% else %>
+            <p><em>No Recordings.</em></p>
         <% end %>
     </p>
-    <p><%= sanitize @location.name %></p>
-    <div>
-      <h5><%= @location.recordings.count %> Comments</h5>
-      <hr>
-      <%= render @location.recordings %>
-      
-      <h6>Add a recording</h6>
-      <%= render 'recordings/form' %>
-    </div>
   </div>
 </div>

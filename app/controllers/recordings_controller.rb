@@ -3,14 +3,27 @@ class RecordingsController < ApplicationController
 
     def create
         @location = location.find(params[:location])
-        @recording = @location.recordings.create(recording_param)
-        @recording.save 
-        redirect_to location_path(@location)
+        @recording = @location.recordings.build(recording_param)
+        if @recording.save 
+          redirect_to @location
+        else
+            render :new
+        end    
     end
+    def destroy
+        @location = Location.find(params[:location])
+        @recording = @location.recordings.find(params[:id])
+        @recording.destroy
+        redirect_to @location
+      end
+
+    def new
+		@location = Location.find(params[:location])
+		@recording = @location.recordings.build
+	end
 
     private
   def recording_param
-     #params.require(:post).permit(:title, :body)
-     params.require(:recording).permit(:status, :temp, :location) 
+     params.require(:recording).permit(:status, :temp) 
   end
 end

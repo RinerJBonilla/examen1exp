@@ -4,15 +4,25 @@
     <% @locations.each do |location| %>
     <div class="col-xs-12">
       <div class="text-center">
-        <h2><%= location.name %></h2>
+        <h2><%= link_to location.name, location %></h2>
         <h6><%= location.created_at.strftime('%b %d, %Y') %></h6>
-      </div>
+        <h7><%= link_to "show",  location %></h7>
+        <h7><%= link_to "edit",  location %></h7>
+        <h7><%= link_to "delete"%></h7>
 
-      <div class="text-center">
-        <%= link_to "READ MORE", location_path(location) %>
+        <tbody>
+                <% location.recordings.each do |rec| %>
+                 <tr>
+                     <td><%= rec.temp %></td>
+                     <td><%= rec.status %></td>
+                     <td><%= link_to "Borrar", location_recording_path(rec.location, rec), method: :delete, data: {confirm: "You SUre?"}  %></td>
+                </tr>
+                <% end %>
+        </tbody>
       </div>
       <br>
     </div>
     <% end %>
   </div>
 </div>
+<h2><%= link_to "NEW",  new_location_path %></h2>
